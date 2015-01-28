@@ -47,6 +47,7 @@
       <div class="header-wrapper">
         <div class="header-global">
           <a href="/" class="header-logo" target="_self"><img src="{% static 'images/gov.uk_logotype_crown.png' %}" width="23" height="20" alt=""> {{ proposition_title }}</a>
+          {% block phase_tag %}{% endblock %}
         </div>
 
         {% if zone %}

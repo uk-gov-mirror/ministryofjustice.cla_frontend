@@ -1,5 +1,4 @@
 #global-header {
-  background-color: $black;
   width: 100%;
 
   .header-wrapper {
@@ -47,4 +46,10 @@
       }
     }
   }
+}
+
+.phase-tag {
+  @include phase-tag(beta);
+  margin-left: 15px;
+  margin-top: 4px;
 }
