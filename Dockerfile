@@ -98,7 +98,6 @@ RUN cd /home/app/django &&  \
 		bower --allow-root  prune && \
 		npm install && \
 		bower --allow-root install && \
-		npm update && \
 		gulp build
 
 
