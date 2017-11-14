@@ -34,7 +34,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
   nodejs npm ruby-bundler
 
 RUN npm install -g n   # Install n globally
-RUN n 0.10.33          # Install and use v0.10.33
+RUN n 0.12.18          # Install and use v0.12.18
 
 # Install Nginx.
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
