@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.13",
-    "angular": "^1.6.8",
+    "angular": "1.4.13",
     "angular-animate": "^1.6.8",
     "angular-blocks": "^0.1.15",
     "angular-hotkeys": "^1.7.0",
@@ -53,6 +53,7 @@
     "gulp-ignore": "^2.0.2",
     "gulp-imagemin": "^4.1.0",
     "gulp-jshint": "^2.1.0",
+    "gulp-livereload": "^3.8.1",
     "gulp-ng-annotate": "^2.1.0",
     "gulp-ng-constant": "^1.2.0",
     "gulp-rename": "^1.2.2",
@@ -85,6 +86,12 @@
     "performance": "protractor tests/angular-js/protractor.conf.performance.js",
     "protractor-debug": "protractor debug tests/angular-js/protractor.conf.local.js",
     "protractor-phantom": "protractor tests/angular-js/protractor.conf.phantom.js",
-    "protractor-allocation": "protractor tests/angular-js/protractor.conf.allocation.js"
+    "protractor-allocation": "protractor tests/angular-js/protractor.conf.allocation.js",
+    "build": "gulp build",
+    "watch": "gulp build && gulp watch",
+    "bower": "bower install",
+    "sass" : "gulp sass",
+    "images": "gulp images",
+    "js"   : "gulp js"
   }
 }
