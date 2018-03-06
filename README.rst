@@ -8,12 +8,12 @@ Dependencies
 
 -  `Virtualenv <http://www.virtualenv.org/en/latest/>`__
 -  `Python 2.7 <http://www.python.org/>`__ (Can be installed using ``brew``)
--  `nodejs.org <http://nodejs.org/>`__ (v0.10.33 - can be installed using nvm <https://github.com/creationix/nvm>)
+-  `nodejs.org <http://nodejs.org/>`__ (v8.9.3 - can be installed using nvm <https://github.com/creationix/nvm>)
 -  `Sass <http://sass-lang.com/>`__ (Ruby version - minimum v3.4)
--  `gulp.js <http://gulpjs.com/>`__ (Installed globally using
-   ``npm install -g gulp``)
--  `Bower <http://bower.io/>`__ (Installed globally using
-   ``npm install -g bower``)
+-  `gulp.js <http://gulpjs.com/>`__ (Installed locally using
+   ``npm install && npm run build`` or ``npm run watch``)
+-  `Bower <http://bower.io/>`__ (Installed locally using
+   ``npm install && npm run bower``)
 
 Installation
 ------------
@@ -51,17 +51,6 @@ Create a ``local.py`` settings file from the example file:
 
     cp cla_frontend/settings/.example.local.py cla_frontend/settings/local.py
 
-Install Frontend dependencies libraries:
-
-::
-
-    npm install -g bower gulp
-
-Install bower packages:
-
-::
-
-    bower install
 
 Install node packages:
 
@@ -73,7 +62,7 @@ Compile assets:
 
 ::
 
-    gulp build
+    npm run bower && npm run build
 
 Install the socket server node packages. Open a new terminal, cd to cla_frontend and run:
 
@@ -123,7 +112,7 @@ We suggest you should keep 3 terminals (+1 for the backend):
 
 ::
 
-    gulp build && gulp watch
+    npm run watch
 
 
 If using the Django Toolbar, include the following in your ``local.py``:
@@ -173,7 +162,7 @@ leave the following command running in a terminal:
 
 ::
 
-    gulp watch
+    npm run watch
 
 The gulp ``watch`` task allows you to use
 `livereload <http://livereload.com/>`__ with this project. The easiest
@@ -187,7 +176,7 @@ way to utilise livereload is to:
 
 ``if DEBUG:     CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", 'ajax.googleapis.com', 'data:', 'cdn.ravenjs.com', 'app.getsentry.com', 'ws://')``
 
--  Run ``gulp watch``
+-  Run ``npm run watch``
 -  Enable livereload by clicking the icon in Chrome
 
 Now any changes in the assets folder will automatically reload the site
@@ -205,7 +194,7 @@ in Sass using the ``scss`` syntax. To compile the stylesheets run:
 
 ::
 
-    gulp sass
+    npm run sass
 
 Javascripts
 ~~~~~~~~~~~
@@ -228,7 +217,7 @@ assets run:
 
 ::
 
-    gulp images
+    npm run images
 
 Try it on Heroku
 ----------------
