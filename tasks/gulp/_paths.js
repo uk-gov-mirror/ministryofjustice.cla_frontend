@@ -40,7 +40,7 @@
       paths.src + 'vendor/jquery/jquery.js',
       paths.src + 'vendor/select2/select2.js',
       // angular specific
-      paths.src + 'vendor/angular/angular.js',
+      '/node_modules/angular/angular.js',
       paths.src + 'vendor/angular-sanitize/angular-sanitize.js',
       paths.src + 'vendor/angular-messages/angular-messages.js',
       paths.src + 'vendor/angular-animate/angular-animate.js',
