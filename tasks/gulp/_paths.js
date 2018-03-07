@@ -36,7 +36,7 @@
   // scripts
   paths.scripts = {
     vendor: [
-      paths.src + 'vendor/lodash/dist/lodash.js',
+      '/node_modules/lodash/lodash.js',
       paths.src + 'vendor/jquery/jquery.js',
       paths.src + 'vendor/select2/select2.js',
       // angular specific
