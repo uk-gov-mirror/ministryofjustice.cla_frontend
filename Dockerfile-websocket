@@ -1,0 +1,52 @@
+#
+# CLA_FRONTEND Dockerfile
+#
+# Pull base image.
+FROM phusion/baseimage:0.9.22
+
+# Set correct environment variables.
+ENV HOME /root
+
+# Use baseimage-docker's init process.
+CMD ["/sbin/my_init"]
+
+# Set timezone
+RUN echo $TZ > /etc/timezone && \
+    apt-get update && apt-get install -y tzdata && \
+    rm /etc/localtime && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata && \
+    apt-get clean
+
+# Remove SSHD
+RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+
+# Dependencies
+RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
+  apt-get -y --force-yes install bash apt-utils nodejs npm
+
+RUN npm install -g n   # Install n globally
+RUN n 8.9.3            # Install and use v8.9.3
+
+RUN mkdir -p /var/log/nodejs && \
+    chown -R www-data:www-data /var/log/nodejs && \
+    chmod -R g+s /var/log/nodejs
+
+# install service files for runit
+ADD ./docker/nodejs.service /etc/service/nodejs/run
+
+# Expose ports. (http, connection to DB, websocket port)
+EXPOSE 8005
+
+# APP_HOME
+ENV APP_HOME /home/app/socketserver
+
+# Add project directory to docker
+ADD ./cla_socketserver /home/app/socketserver
+
+WORKDIR /home/app/socketserver
+
+RUN npm install
+
+# Cleanup
+RUN apt-get remove -y npm && apt-get autoremove -y
