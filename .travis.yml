@@ -10,7 +10,7 @@ services:
 # Setup Browsers
 # pull and build frontend
 before_install:
-  - docker build https://github.com/ministryofjustice/cla_backend.git#container:develop
+  - docker build github.com/ministryofjustice/cla_backend
   - docker pull selenium/node-firefox:3.8.1-francium
   - docker pull selenium/hub:3.8.1-francium
   - docker run -d -p 4444:4444 --name selenium-hub selenium/hub:3.8.1-francium
