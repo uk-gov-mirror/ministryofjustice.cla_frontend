@@ -1,0 +1,25 @@
+language: python
+python:
+  - "2.7"
+
+services:
+  - docker
+
+# Pull and build Backend
+# Setup Selemium Grid
+# Setup Browsers
+# pull and build frontend
+before_install:
+  - docker build https://github.com/ministryofjustice/cla_frontend.git#container:master
+  - docker pull selenium/node-firefox:3.8.1-francium
+  - docker pull selenium/hub:3.8.1-francium
+  - docker run -d -p 4444:4444 --name selenium-hub selenium/hub:3.8.1-francium
+  - docker run -d --link selenium-hub:hub --name selenium-node-firefox -v /dev/shm:/dev/shm selenium/node-firefox:3.8.1-francium
+  - docker-compose -f docker
+
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+script:
+  - python tests.py
+
