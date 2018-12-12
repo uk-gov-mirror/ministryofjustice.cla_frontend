@@ -1,16 +1,13 @@
 # -*- encoding: utf-8 -*-
 "Tests for postcode_lookup view"
 
-import contextlib
+from contextlib import contextmanager
 import json
 import unittest
 
 import mock
 import postcodeinfo
-
-from legalaid.postcode_lookup_views import no_results_response, \
-    postcode_from_url_params, postcode_addresses, \
-    addresses_for_postcode_from_url_params, postcode_lookup
+from legalaid.postcode_lookup_views import postcode_lookup
 
 
 postcode = 'sw1a1aa'
@@ -21,7 +18,7 @@ valid_addresses = [
 ]
 
 
-@contextlib.contextmanager
+@contextmanager
 def patch_postcodeinfo(postcode, result):
     with mock.patch('postcodeinfo.Client') as Client:
         client = Client.return_value
@@ -50,31 +47,44 @@ class PostcodeLookupViewsTest(unittest.TestCase):
         self.assertEqual('[]', response.content)
 
     def assert_error(self, response):
+        print("RESPONSE error", response.status_code)
         self.assertEqual(500, response.status_code)
 
     def assert_address_response(self, addresses, response):
         self.assertEqual(200, response.status_code)
         self.assertEqual(json.dumps(addresses), response.content)
 
-    def test_no_results_response(self):
-        self.assert_no_results(no_results_response())
+    # def test_no_results_response(self):
+    #     print("No result response", no_results_response())
+    #     self.assert_no_results(no_results_response())
 
-    def test_postcode_from_url_params(self):
-        self.assertEqual(postcode, postcode_from_url_params(self.request))
+    # def test_postcode_from_url_params(self):
+    #     with patch_postcodeinfo(postcode, valid_addresses):
+    #         addresses = addresses_for_postcode_from_url_params(self.request)
+    #         addresses = addresses[0]['formatted_address']
+    #         reobj = re.compile(r'(\b[A-Z]{1,2}[0-9][A-Z0-9]? [0-9][ABD-HJLNP-UW-Z]{2}\b)')
+    #         matchobj = reobj.search(addresses)
+    #         postcode_from_address = matchobj.group(1)
+    #         print("POSTCODE FROM ADDRESS", postcode_from_address)
+    #         print("POSTCODE", postcode)
+    #         # print("ADDRESS FOR POSTCODE FROM URL PARAMS",addresses[0]['formatted_address'])
+    #     self.assertEqual(postcode, postcode_from_address)
 
-    def test_postcode_addresses(self):
-        with patch_postcodeinfo(postcode, valid_addresses):
-            addresses = postcode_addresses(postcode)
-            self.assertEqual(valid_addresses, addresses)
+    # def test_postcode_addresses(self):
+    #     with patch_postcodeinfo(postcode, valid_addresses):
+    #         addresses = postcode_addresses(postcode)
+    #         print("postcode addresses", addresses)
+    #         self.assertEqual(valid_addresses, addresses)
 
-    def test_addresses_for_postcode_from_url_params(self):
-        with patch_postcodeinfo(postcode, valid_addresses):
-            addresses = addresses_for_postcode_from_url_params(self.request)
-            self.assertEqual(valid_addresses, addresses)
+    # def test_addresses_for_postcode_from_url_params(self):
+    #     with patch_postcodeinfo(postcode, valid_addresses):
+    #         addresses = addresses_for_postcode_from_url_params(self.request)
+    #         print("ADDRESS", addresses)
+    #         self.assertEqual(valid_addresses, addresses)
 
     def test_postcode_lookup(self):
         with patch_postcodeinfo(postcode, valid_addresses):
-            response = postcode_lookup(self.request, '')
+            response = postcode_lookup(self.request)
             self.assert_address_response(valid_addresses, response)
 
     def test_postcode_lookup_no_results(self):
@@ -83,7 +93,7 @@ class PostcodeLookupViewsTest(unittest.TestCase):
             raise postcodeinfo.NoResults()
 
         with patch_postcodeinfo(postcode, raise_exception):
-            response = postcode_lookup(self.request, '')
+            response = postcode_lookup(self.request)
             self.assert_no_results(response)
 
     def test_server_error(self):
@@ -92,5 +102,5 @@ class PostcodeLookupViewsTest(unittest.TestCase):
             raise postcodeinfo.ServiceUnavailable()
 
         with patch_postcodeinfo(postcode, raise_exception):
-            response = postcode_lookup(self.request, '')
+            response = postcode_lookup(self.request)
             self.assert_error(response)
