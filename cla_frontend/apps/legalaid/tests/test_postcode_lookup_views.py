@@ -13,6 +13,7 @@ from core.testing.test_base import CLATFrontEndTestCase
 from django.test import RequestFactory
 from legalaid.postcode_lookup_views import postcode_lookup
 
+key='fake_key'
 postcode = 'sw1a1aa'
 postcode_is_None = None
 malformed_postcode = 'skd99kdf12ws'
