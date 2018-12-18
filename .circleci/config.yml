@@ -98,7 +98,7 @@ jobs:
           key: bower-v1-{{ checksum "bower.json" }}
           paths:
             # - "./cla_frontend/assets-src/vendor"
-            - "./cla_frontend/assets-src/javascripts/vendor"
+            - "./cla_frontend/assets-src/javascripts/app/js/controllers"
       - run:
           name: Bundle JavaScript
           command: npm run js
