@@ -97,9 +97,10 @@ jobs:
       - save_cache:
           key: bower-v1-{{ checksum "bower.json" }}
           paths:
-            - "./cla_frontend/assets-src/vendor"
+            # - "./cla_frontend/assets-src/vendor"
+            - "./cla_frontend/assets-src/javascripts/vendor"
       - run:
-          name: Bundle JavaScript 
+          name: Bundle JavaScript
           command: npm run js
       - run:
           name: Run Jasmine unit tests
