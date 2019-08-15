@@ -56,7 +56,12 @@
           return AdaptationsMetadata.options().$promise;
         }],
         eod_details: ['case', 'EODDetails', function(case_, EODDetails) {
-          return case_.eod_details ? EODDetails.get({case_reference: case_.reference}).$promise : new EODDetails({case_reference: case_.reference});
+          var params = {
+            case_reference: case_.reference,
+            eod_details_count: case_.eod_details_count,
+            eod_details_editable: case_.eod_details_editable
+           };
+          return case_.eod_details ? EODDetails.get({case_reference: case_.reference}).$promise : new EODDetails(params);
         }],
         thirdparty_details: ['case', 'ThirdParty', function(case_, ThirdParty) {
           return case_.thirdparty_details ? ThirdParty.get({case_reference: case_.reference}).$promise : new ThirdParty({case_reference: case_.reference, personal_details: {}});

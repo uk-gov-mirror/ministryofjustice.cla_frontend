@@ -388,9 +388,16 @@
         return this.reference && this.categories && this.categories.length > 0 || this.notes && this.notes.length > 0;
       };
 
+      resource.prototype.isEditable = function() {
+        if (this.$resolved) {
+          return true;
+        }
+        return this.eod_details_editable;
+      };
+
       resource.prototype.$eodBadge = function() {
         // returns either the number of selected categories or ! if there are only notes
-        var badge = this.categories && this.categories.length;
+        var badge = this.eod_details_count || (this.categories && this.categories.length);
         return badge || (this.notes && '!');
       };
 

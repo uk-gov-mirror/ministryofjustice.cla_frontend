@@ -10,7 +10,7 @@
   <callback-status data-block-prepend="rh-col" case="case"></callback-status>
 
   <div class="FormActions" data-block="case-eod_details" ng-class="{'Icon--formRow': !personal_details.reference && !personal_details_frm_visible}">
-    <button class="Button Button--add Button--secondary" ui-sref="case_detail.eod_details" title="Expressions of Dissatisfaction">
+    <button class="Button Button--add Button--secondary" ui-sref="case_detail.eod_details" title="Expressions of Dissatisfaction" ng-disabled="!eod_details.isEditable()">
       Add EOD
       <span class="Badge Badge--warning" ng-if="eod_details && eod_details.$eodBadge()">
         {{ eod_details.$eodBadge() }}
