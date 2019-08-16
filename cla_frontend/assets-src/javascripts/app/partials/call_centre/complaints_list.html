@@ -24,8 +24,14 @@
   <tbody>
     <tr ng-class="statusClass(complaint)" dir-paginate="complaint in complaintsList.results | itemsPerPage: 20" total-items="complaintsList.count" current-page="currentPage">
       <td><a href="" class="Icon Icon--alert Icon--red" ng-click="goToComplaint(complaint)" ng-if="complaint.out_of_sla" title="Out of SLA"></a></td>
-      <td><a href="" ng-click="goToComplaint(complaint)">{{ complaint.case_reference }}</a></td>
-      <td><a href="" ng-click="goToComplaint(complaint)">{{ complaint.full_name }}</a></td>
+      <td>
+        <a href="" ng-click="goToComplaint(complaint)" ng-if="complaint.is_editable">{{ complaint.case_reference }}</a>
+        <span ng-if="complaint.is_editable == false">{{ complaint.case_reference }}</span>
+      </td>
+      <td>
+        <a href="" ng-click="goToComplaint(complaint)" ng-if="complaint.is_editable">{{ complaint.full_name }}</a>
+        <span ng-if="complaint.is_editable == false">{{ complaint.full_name }}</span>
+      </td>
       <td>{{ complaint.category_name }}</td>
       <td>{{ displayMappedValue('levels', complaint.level) }}</td>
       <td>{{ displayMappedValue('justified', complaint.justified) }}</td>
