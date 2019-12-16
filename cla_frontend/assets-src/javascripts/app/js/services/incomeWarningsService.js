@@ -25,6 +25,9 @@
       };
 
       this.checkZeroIncome = function () {
+        if (this.eligibilityCheck.in_category_skip_income_check) {
+          return false;
+        }
         // fail if sections aren't complete
         if (!this.isComplete(this.eligibilityCheck.you.income)) {
           return false;
