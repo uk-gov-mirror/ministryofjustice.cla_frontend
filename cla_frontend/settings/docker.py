@@ -23,7 +23,7 @@ MANAGERS = ADMINS
 
 HOST_NAME = os.environ.get("HOST_NAME", "localhost")
 
-BACKEND_BASE_URI = os.environ["BACKEND_BASE_URI"]
+# BACKEND_BASE_URI = os.environ["BACKEND_BASE_URI"]
 
 ZONE_PROFILES = {
     "call_centre": {
