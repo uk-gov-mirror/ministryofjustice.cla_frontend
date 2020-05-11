@@ -198,7 +198,9 @@ LOGGING = {
     "loggers": {"django.request": {"handlers": ["mail_admins"], "level": "ERROR", "propagate": True}},
 }
 
-BACKEND_BASE_URI = os.environ.get("BACKEND_BASE_URI", "http://127.0.0.1:8000")
+BACKEND_BASE_URI = (
+    "https://lga-999-queue-worker-redis-laa-cla-backend-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
+)
 
 ZONE_PROFILES = {
     "call_centre": {
