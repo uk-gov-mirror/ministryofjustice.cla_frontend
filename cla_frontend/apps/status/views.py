@@ -34,5 +34,11 @@ class PingJsonView(View):
     """
 
     def get(self, request):
-        response_data = {"build_tag": None, "build_date": None, "version_number": None, "commit_id": None}
+        response_data = {
+            "build_tag": None,
+            "build_date": None,
+            "version_number": None,
+            "commit_id": None,
+            "test-1277": True,
+        }
         return JsonResponse(response_data)
