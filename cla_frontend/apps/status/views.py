@@ -39,6 +39,6 @@ class PingJsonView(View):
             "build_date": None,
             "version_number": None,
             "commit_id": None,
-            "test-1277": True,
+            "test-1277-2": True,
         }
         return JsonResponse(response_data)
